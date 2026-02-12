@@ -6,7 +6,10 @@
 }
 
 .product-detail .product-brand,
-.product-detail .product-category {
+.product-detail .product-category,
+.product-detail .product-series,
+.product-detail .product-display-name,
+.product-detail .product-release-date {
   margin: 0.5em 0;
 }
 
@@ -28,6 +31,67 @@
   gap: 1em;
 }
 
+.product-detail .product-dimensions,
+.product-detail .product-attribution {
+  margin-top: 1.5em;
+}
+
+.product-detail .product-dimensions h3,
+.product-detail .product-attribution h3 {
+  font-size: var(--heading-font-size-s);
+  margin-bottom: 0.5em;
+}
+
+.product-detail .product-selling-points {
+  margin-top: 1.5em;
+}
+
+.product-detail .product-selling-points h3 {
+  font-size: var(--heading-font-size-s);
+  margin-bottom: 0.5em;
+}
+
+.product-detail .selling-points-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.product-detail .selling-points-list li {
+  margin: 1em 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.75em;
+}
+
+.product-detail .selling-point-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.product-detail .selling-point-title {
+  font-weight: 700;
+}
+
+.product-detail .selling-point-text {
+  width: 100%;
+  font-size: var(--body-font-size-s);
+  color: var(--dark-color);
+}
+
+.product-detail .product-specs,
+.product-detail .product-features {
+  margin-top: 1.5em;
+}
+
+.product-detail .product-specs h3,
+.product-detail .product-features h3 {
+  font-size: var(--heading-font-size-s);
+  margin-bottom: 0.5em;
+}
+
 .product-detail .product-gallery {
   margin-top: 1.5em;
 }
@@ -47,17 +111,6 @@
   height: auto;
 }
 
-.product-detail .product-specs,
-.product-detail .product-features {
-  margin-top: 1.5em;
-}
-
-.product-detail .product-specs h3,
-.product-detail .product-features h3 {
-  font-size: var(--heading-font-size-s);
-  margin-bottom: 0.5em;
-}
-
 .product-detail ul {
   margin: 0;
   padding-left: 1.5em;
@@ -65,6 +118,10 @@
 
 .product-detail .button-container {
   margin-top: 1.5em;
+}
+
+.product-detail .button-container .button + .button {
+  margin-left: 0.5em;
 }
 
 @media (width >= 900px) {

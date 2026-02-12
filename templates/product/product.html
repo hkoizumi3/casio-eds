@@ -66,24 +66,157 @@
               {{#category}}
               <p class="product-category"><strong>Category:</strong> {{#category.i18n}}{{category.i18n}}{{/category.i18n}}{{^category.i18n}}{{category.title}}{{/category.i18n}}</p>
               {{/category}}
+              {{#series}}
+              <p class="product-series"><strong>Series:</strong> {{#series}}{{title}} {{/series}}</p>
+              {{/series}}
               {{#description}}
               <div class="product-description">{{description}}</div>
               {{/description}}
-              {{#commerceData.price}}
+              {{#listPrice}}
+              <p class="product-price"><strong>Price:</strong> <span class="product-list-price" data-value="{{listPrice}}">¥{{listPrice}}</span></p>
+              {{/listPrice}}
+              {{^listPrice}}{{#commerceData.price}}
               <p class="product-price"><strong>Price:</strong> {{commerceData.price}}</p>
-              {{/commerceData.price}}
-              {{^commerceData.price}}{{#price}}
+              {{/commerceData.price}}{{/listPrice}}
+              {{^listPrice}}{{^commerceData.price}}{{#price}}
               <p class="product-price"><strong>Price:</strong> {{price}}</p>
-              {{/price}}{{/commerceData.price}}
+              {{/price}}{{/commerceData.price}}{{/listPrice}}
+              {{#productDisplayName}}
+              <p class="product-display-name"><strong>Model:</strong> {{productDisplayName}}</p>
+              {{/productDisplayName}}
               {{#sku}}
               <p class="product-sku"><strong>SKU:</strong> {{sku}}</p>
               {{/sku}}
+              {{#releaseDate}}
+              <p class="product-release-date"><strong>Release:</strong> {{releaseDate}}</p>
+              {{/releaseDate}}
               {{#socialProofingData}}
               <div class="product-social-proof">
                 {{#socialProofingData.pv}}<span>Views: {{socialProofingData.pv}}</span>{{/socialProofingData.pv}}
                 {{#socialProofingData.sales}}<span>Sales: {{socialProofingData.sales}}</span>{{/socialProofingData.sales}}
               </div>
               {{/socialProofingData}}
+
+              <!-- Dimensions -->
+              <div class="product-dimensions">
+                <h3>Dimensions</h3>
+                <ul>
+                  {{#width}}<li>Width: {{width}}mm</li>{{/width}}
+                  {{#height}}<li>Height: {{height}}mm</li>{{/height}}
+                  {{#depth}}<li>Depth: {{depth}}mm</li>{{/depth}}
+                  {{#weight}}<li>Weight: {{weight}}g</li>{{/weight}}
+                  {{#bandAdjustableLength}}<li>Band: {{bandAdjustableLength}}</li>{{/bandAdjustableLength}}
+                </ul>
+              </div>
+
+              {{#additionalAttributions.waterResistant}}
+              <div class="product-attribution product-water-resistant">
+                <h3>Water resistant</h3>
+                <p>{{additionalAttributions.waterResistant.title}}</p>
+              </div>
+              {{/additionalAttributions.waterResistant}}
+              {{#additionalAttributions.faceSize}}
+              <div class="product-attribution product-face-size">
+                <h3>Face size</h3>
+                <p>{{additionalAttributions.faceSize.title}}</p>
+              </div>
+              {{/additionalAttributions.faceSize}}
+              {{#additionalAttributions.batteryAndBatteryLife}}
+              <div class="product-attribution product-battery">
+                <h3>Battery</h3>
+                <ul>
+                  {{#additionalAttributions.batteryAndBatteryLife}}
+                  <li>{{title}}</li>
+                  {{/additionalAttributions.batteryAndBatteryLife}}
+                </ul>
+              </div>
+              {{/additionalAttributions.batteryAndBatteryLife}}
+              {{#additionalAttributions.accuracy}}
+              <div class="product-attribution product-accuracy">
+                <h3>Accuracy</h3>
+                <ul>
+                  {{#additionalAttributions.accuracy}}
+                  <li>{{title}}</li>
+                  {{/additionalAttributions.accuracy}}
+                </ul>
+              </div>
+              {{/additionalAttributions.accuracy}}
+              {{#additionalAttributions.resist}}
+              <div class="product-attribution product-resist">
+                <h3>Resistance</h3>
+                <ul>
+                  {{#additionalAttributions.resist}}
+                  <li>{{title}}</li>
+                  {{/additionalAttributions.resist}}
+                </ul>
+              </div>
+              {{/additionalAttributions.resist}}
+              {{#additionalAttributions.displayType}}
+              <div class="product-attribution product-display-type">
+                <h3>Display</h3>
+                <ul>
+                  {{#additionalAttributions.displayType}}
+                  <li>{{title}}</li>
+                  {{/additionalAttributions.displayType}}
+                </ul>
+              </div>
+              {{/additionalAttributions.displayType}}
+              {{#additionalAttributions.stopwatch}}
+              <div class="product-attribution product-stopwatch">
+                <h3>Stopwatch</h3>
+                <ul>
+                  {{#additionalAttributions.stopwatch}}
+                  <li>{{title}}</li>
+                  {{/additionalAttributions.stopwatch}}
+                </ul>
+              </div>
+              {{/additionalAttributions.stopwatch}}
+              {{#additionalAttributions.worldTime}}
+              <div class="product-attribution product-world-time">
+                <h3>World time</h3>
+                <ul>
+                  {{#additionalAttributions.worldTime}}
+                  <li>{{title}}</li>
+                  {{/additionalAttributions.worldTime}}
+                </ul>
+              </div>
+              {{/additionalAttributions.worldTime}}
+              {{#additionalAttributions.calendar}}
+              <div class="product-attribution product-calendar">
+                <h3>Calendar</h3>
+                <ul>
+                  {{#additionalAttributions.calendar}}
+                  <li>{{title}}</li>
+                  {{/additionalAttributions.calendar}}
+                </ul>
+              </div>
+              {{/additionalAttributions.calendar}}
+              {{#additionalAttributions.displayIllumination}}
+              <div class="product-attribution product-illumination">
+                <h3>Illumination</h3>
+                <ul>
+                  {{#additionalAttributions.displayIllumination}}
+                  <li>{{title}}</li>
+                  {{/additionalAttributions.displayIllumination}}
+                </ul>
+              </div>
+              {{/additionalAttributions.displayIllumination}}
+
+              {{#sellingPoints}}
+              <div class="product-selling-points">
+                <h3>Selling points</h3>
+                <ul class="selling-points-list">
+                  {{#sellingPoints}}
+                  <li>
+                    {{#fields.image}}<img src="{{fields.image}}" alt="{{#fields.alt}}{{fields.alt}}{{/fields.alt}}" class="selling-point-img">{{/fields.image}}
+                    <span class="selling-point-title">{{title}}</span>
+                    {{#fields.displayText}}<span class="selling-point-text">{{fields.displayText}}</span>{{/fields.displayText}}
+                  </li>
+                  {{/sellingPoints}}
+                </ul>
+              </div>
+              {{/sellingPoints}}
+
               <div class="product-specs">
                 <h3>Specifications</h3>
                 <ul>
@@ -100,6 +233,7 @@
                   {{/features}}
                 </ul>
               </div>
+              {{#productAssetsJson}}
               <div class="product-gallery">
                 <h3>Gallery</h3>
                 {{#productAssetsJson}}
@@ -108,12 +242,19 @@
                 </picture>
                 {{/productAssetsJson}}
               </div>
+              {{/productAssetsJson}}
+              {{#manualPageUrl}}
+              <p class="button-container"><a href="{{manualPageUrl}}" class="button secondary">Manual</a></p>
+              {{/manualPageUrl}}
               {{#brand.productPageRootPath}}
               <p class="button-container"><a href="{{brand.productPageRootPath}}" class="button primary">View on brand site</a></p>
               {{/brand.productPageRootPath}}
-              {{^brand.productPageRootPath}}{{#link}}
+              {{^brand.productPageRootPath}}{{#url}}
+              <p class="button-container"><a href="{{url}}" class="button primary">Product page</a></p>
+              {{/url}}{{/brand.productPageRootPath}}
+              {{^brand.productPageRootPath}}{{^url}}{{#link}}
               <p class="button-container"><a href="{{link}}" class="button primary">Learn more</a></p>
-              {{/link}}{{/brand.productPageRootPath}}
+              {{/link}}{{/url}}{{/brand.productPageRootPath}}
             </div>
           </div>
         </div>
