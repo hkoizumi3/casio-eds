@@ -8,8 +8,8 @@
     move-to-http-header="true"
   >
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{#productName}}{{productName}}{{/productName}}{{^productName}}{{title}}{{/productName}}</title>
-  <meta property="og:title" content="{{#productName}}{{productName}}{{/productName}}{{^productName}}{{title}}{{/productName}}">
+  <title>{{#productName}}{{productName}}{{/productName}}{{^productName}}{{#name}}{{name}}{{/name}}{{^name}}{{title}}{{/title}}{{/productName}}</title>
+  <meta property="og:title" content="{{#productName}}{{productName}}{{/productName}}{{^productName}}{{#name}}{{name}}{{/name}}{{^name}}{{title}}{{/title}}{{/productName}}">
   {{#description}}
   <meta name="description" content="{{description}}">
   <meta property="og:description" content="{{description}}">
@@ -17,9 +17,12 @@
   {{#productAssetsJson.0.path}}
   <meta property="og:image" content="{{productAssetsJson.0.path}}">
   {{/productAssetsJson.0.path}}
-  {{^productAssetsJson.0.path}}{{#image}}
+  {{^productAssetsJson.0.path}}{{#images.0}}
+  <meta property="og:image" content="{{images.0}}">
+  {{/images.0}}{{/productAssetsJson.0.path}}
+  {{^productAssetsJson.0.path}}{{^images.0}}{{#image}}
   <meta property="og:image" content="{{image}}">
-  {{/image}}{{/productAssetsJson.0.path}}
+  {{/image}}{{/images.0}}{{/productAssetsJson.0.path}}
   {{#sku}}
   <meta name="product:sku" content="{{sku}}">
   {{/sku}}
@@ -39,17 +42,23 @@
         <div class="hero">
           <div>
             <div>
-              {{#productAssetsJson.0.path}}
-              <picture>
-                <img src="{{productAssetsJson.0.path}}" alt="{{#productAssetsJson.0.alt}}{{productAssetsJson.0.alt}}{{/productAssetsJson.0.alt}}{{^productAssetsJson.0.alt}}{{#productName}}{{productName}}{{/productName}}{{^productName}}{{title}}{{/productName}}{{/productAssetsJson.0.alt}}" loading="eager">
-              </picture>
-              {{/productAssetsJson.0.path}}
-              {{^productAssetsJson.0.path}}{{#image}}
-              <picture>
-                <img src="{{image}}" alt="{{#imageAlt}}{{imageAlt}}{{/imageAlt}}{{^imageAlt}}{{#productName}}{{productName}}{{/productName}}{{^productName}}{{title}}{{/productName}}{{/imageAlt}}" loading="eager">
-              </picture>
-              {{/image}}{{/productAssetsJson.0.path}}
-              <h1>{{#productName}}{{productName}}{{/productName}}{{^productName}}{{title}}{{/productName}}</h1>
+              {{#productAssetsJson}}
+              <div class="product-gallery">
+                {{#productAssetsJson}}
+                <picture>
+                  <img src="https://www.casio.com{{path}}" alt="{{#alt}}{{alt}}{{/alt}}{{^alt}}{{/alt}}" loading="lazy">
+                </picture>
+                {{/productAssetsJson}}
+              </div>
+              {{/productAssetsJson}}
+              {{#images.0}}
+              <div class="product-gallery product-gallery-images">
+                {{#images}}
+                <img src="https://www.casio.com{{.}}" alt="{{#name}}{{name}}{{/name}}{{^name}}{{#productName}}{{productName}}{{/productName}}{{^productName}}{{title}}{{/productName}}{{/name}}" class="product-image" loading="lazy">
+                {{/images}}
+              </div>
+              {{/images.0}}
+              <h1>{{#productName}}{{productName}}{{/productName}}{{^productName}}{{#name}}{{name}}{{/name}}{{^name}}{{title}}{{/title}}{{/productName}}</h1>
             </div>
           </div>
         </div>
@@ -60,6 +69,13 @@
         <div class="product-detail">
           <div>
             <div>
+              {{#badges}}
+              <div class="product-badges">
+                {{#badges}}
+                <span class="badge">{{.}}</span>
+                {{/badges}}
+              </div>
+              {{/badges}}
               {{#brand}}
               <p class="product-brand"><strong>Brand:</strong> {{#brand.i18n}}{{brand.i18n}}{{/brand.i18n}}{{^brand.i18n}}{{brand.title}}{{/brand.i18n}}</p>
               {{/brand}}
@@ -78,15 +94,32 @@
               {{^listPrice}}{{#commerceData.price}}
               <p class="product-price"><strong>Price:</strong> {{commerceData.price}}</p>
               {{/commerceData.price}}{{/listPrice}}
-              {{^listPrice}}{{^commerceData.price}}{{#price}}
+              {{^listPrice}}{{^commerceData.price}}{{#price.amount}}
+              <div class="product-pricing">
+                {{#price.onSale}}
+                <span class="original-price">{{price.currency}} {{price.amount}}</span>
+                <span class="sale-price">{{price.currency}} {{price.salePrice}}</span>
+                {{/price.onSale}}
+                {{^price.onSale}}
+                <span class="price">{{price.currency}} {{price.amount}}</span>
+                {{/price.onSale}}
+              </div>
+              {{/price.amount}}{{/commerceData.price}}{{/listPrice}}
+              {{^listPrice}}{{^commerceData.price}}{{^price.amount}}{{#price}}
               <p class="product-price"><strong>Price:</strong> {{price}}</p>
-              {{/price}}{{/commerceData.price}}{{/listPrice}}
+              {{/price}}{{/price.amount}}{{/commerceData.price}}{{/listPrice}}
               {{#productDisplayName}}
               <p class="product-display-name"><strong>Model:</strong> {{productDisplayName}}</p>
               {{/productDisplayName}}
               {{#sku}}
               <p class="product-sku"><strong>SKU:</strong> {{sku}}</p>
               {{/sku}}
+              {{#rating}}
+              <div class="product-rating">⭐ {{rating.score}} / 5 ({{rating.reviewCount}} reviews)</div>
+              {{/rating}}
+              {{#availability}}
+              <p class="product-availability availability-{{availability}}">{{availability}}</p>
+              {{/availability}}
               {{#releaseDate}}
               <p class="product-release-date"><strong>Release:</strong> {{releaseDate}}</p>
               {{/releaseDate}}
@@ -233,16 +266,6 @@
                   {{/features}}
                 </ul>
               </div>
-              {{#productAssetsJson}}
-              <div class="product-gallery">
-                <h3>Gallery</h3>
-                {{#productAssetsJson}}
-                <picture>
-                  <img src="{{path}}" alt="{{#alt}}{{alt}}{{/alt}}{{^alt}}{{/alt}}" loading="lazy">
-                </picture>
-                {{/productAssetsJson}}
-              </div>
-              {{/productAssetsJson}}
               {{#manualPageUrl}}
               <p class="button-container"><a href="{{manualPageUrl}}" class="button secondary">Manual</a></p>
               {{/manualPageUrl}}
