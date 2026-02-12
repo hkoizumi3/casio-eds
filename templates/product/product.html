@@ -15,7 +15,7 @@
   <meta property="og:description" content="{{description}}">
   {{/description}}
   {{#productAssetsJson.0.path}}
-  <meta property="og:image" content="{{productAssetsJson.0.path}}">
+  <meta property="og:image" content="https://www.casio.com{{productAssetsJson.0.path}}">
   {{/productAssetsJson.0.path}}
   {{^productAssetsJson.0.path}}{{#images.0}}
   <meta property="og:image" content="{{images.0}}">
@@ -46,7 +46,7 @@
               <div class="product-gallery">
                 {{#productAssetsJson}}
                 <picture>
-                  <img src="https://www.casio.com{{path}}" alt="{{#alt}}{{alt}}{{/alt}}{{^alt}}{{/alt}}" loading="lazy">
+                  <img src="{{path}}" alt="{{#alt}}{{alt}}{{/alt}}{{^alt}}{{/alt}}" loading="lazy">
                 </picture>
                 {{/productAssetsJson}}
               </div>
@@ -54,7 +54,7 @@
               {{#images.0}}
               <div class="product-gallery product-gallery-images">
                 {{#images}}
-                <img src="https://www.casio.com{{.}}" alt="{{#name}}{{name}}{{/name}}{{^name}}{{#productName}}{{productName}}{{/productName}}{{^productName}}{{title}}{{/productName}}{{/name}}" class="product-image" loading="lazy">
+                <img src="{{.}}" alt="{{#name}}{{name}}{{/name}}{{^name}}{{#productName}}{{productName}}{{/productName}}{{^productName}}{{title}}{{/title}}{{/name}}" class="product-image" loading="lazy">
                 {{/images}}
               </div>
               {{/images.0}}
@@ -130,7 +130,6 @@
               </div>
               {{/socialProofingData}}
 
-              <!-- Dimensions -->
               <div class="product-dimensions">
                 <h3>Dimensions</h3>
                 <ul>
@@ -241,7 +240,7 @@
                 <ul class="selling-points-list">
                   {{#sellingPoints}}
                   <li>
-                    {{#fields.image}}<img src="{{fields.image}}" alt="{{#fields.alt}}{{fields.alt}}{{/fields.alt}}" class="selling-point-img">{{/fields.image}}
+                    {{#fields.image}}<img src="https://www.casio.com{{fields.image}}" alt="{{#fields.alt}}{{fields.alt}}{{/fields.alt}}" class="selling-point-img">{{/fields.image}}
                     <span class="selling-point-title">{{title}}</span>
                     {{#fields.displayText}}<span class="selling-point-text">{{fields.displayText}}</span>{{/fields.displayText}}
                   </li>
